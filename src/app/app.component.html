@@ -1,20 +1,62 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1 style="text-align:center;">ระบบคำนวณค่า TAXI</h1>
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <label>ระยะทาง / กิโลเมตร</label>
+        <input type="number" min="0" class="form-control" placeholder="ระบุระยะทาง" [(ngModel)]="calculate.kilo">
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-4 offset-4">
+        <label>ระยะเวลารถติด</label>
+        <input type="number" class="form-control" [(ngModel)]="calculate.late">
+      </div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <label>ค่าโดยสาร / บาท</label>
+        <input type="number" class="form-control" [(ngModel)]="calculate.sum" disabled>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <button type="button" class="btn btn-info" style="margin-top: 15px;" (click)="Sumation()">คำนวณค่าโดยสาร</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 offset-4">
+        <h3><b>อัตราค่าโดยสาร</b></h3>
+        <ul>
+          <li>ระยะทาง 1 กิโลเมตรแรก 35.00 บาท</li>
+          <li>ระยะทางเกินกว่า 1 กิโลเมตรถึงกิโลเมตรที่ 10 กิโลเมตรละ 5.50 บาท</li>
+          <li>ระยะทางเกินกว่า 10 กิโลเมตรถึงกิโลเมตรที่ 20 กิโลเมตรละ 6.50 บาท</li>
+          <li>ระยะทางเกินกว่า 20 กิโลเมตรถึงกิโลเมตรที่ 40 กิโลเมตรละ 7.50 บาท</li>
+          <li>ระยะทางเกินกว่า 40 กิโลเมตรถึงกิโลเมตรที่ 60 กิโลเมตรละ 8.00 บาท</li>
+          <li>ระยะทางเกินกว่า 60 กิโลเมตรถึงกิโลเมตรที่ 80 กิโลเมตรละ 9.00 บาท</li>
+          <li>ระยะทางเกินกว่า 80 กิโลเมตรขึ้นไป กิโลเมตรละ 10.50 บาท</li>
+
+        </ul>
+        <p>ค่าโดยสารเมื่อคำนวณออกมาเสร็จ จะคิดเป็นจำนวนเต็มคี่ (เช่น คำนวณได้ 47.75 บาท ก็จะปัดขึ้นเป็น 49 บาท ซึ่งเป็นจำนวนเต็มคี่ที่อยู่ถัดไป)</p>
+        <!-- <p>ในกรณีที่รถจอดหรือเคลื่อนที่ได้ไม่เกิน 6 กิโลเมตร/ชั่วโมง มิเตอร์เวลาจะเดิน อัตราค่าโดยสาร 2 บาท/นาที มิเตอร์จะขยับทีละ 2 บาท โดยการคิดค่าโดยสารนั้น จะคิดแยกเป็นส่วนๆ</p> -->
+      </div>
+    </div>
+
+    <!-- <div class="text-center">
+      <p *ngIf="!editted">
+        <button type="submit" class="btn btn-success" [disabled]="!form.valid" style="margin-right:10px;">Add Ticket</button>
+        <button type="submit" class="btn btn-default"  [routerLink]="['/cm/ticket']" > Back </button>
+
+      </p>
+      <p *ngIf="editted">
+        <button type="submit" class="btn btn-warning" [disabled]="!form.valid" style="margin-right:10px;"> Ediit</button>
+        <button type="submit" class="btn btn-default"  [routerLink]="['/cm/ticket']" >Back</button>
+      </p>
+    </div> -->
+</div>
